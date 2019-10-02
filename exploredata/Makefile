@@ -1,5 +1,8 @@
 -include .env
 
+DEVOPS=../../infrastructure/devops
+EXPLOREDATA=ansible-playbook $(DEVOPS)/exploredata.yml -i$(DEVOPS)/production.inventory
+
 .PHONY: notebook hub up notebook-shell
 
 
@@ -13,7 +16,10 @@ up: hub notebook
 	docker-compose up
 
 pushtest:
-	../../infrastructure/devops/deploy.py exploredata pushtest -eexploredata_src=$(PWD)
+	$(EXPLOREDATA) -eexploredata_src=$(PWD) -tpushtest
+
+pushprod:
+	$(EXPLOREDATA) -eexploredata_src=$(PWD) -tpushprod
 
 notebook-shell: notebook
 	docker run --rm -it --entrypoint=bash notebook
