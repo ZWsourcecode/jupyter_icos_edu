@@ -1,7 +1,7 @@
 -include .env
 
 DEVOPS=../../infrastructure/devops
-EXPLOREDATA=ansible-playbook $(DEVOPS)/exploredata.yml -i$(DEVOPS)/production.inventory
+EXPLOREDATA=ansible-playbook $(DEVOPS)/exploredata.yml -i$(DEVOPS)/production.inventory -lexploredata
 
 .PHONY: notebook hub up notebook-shell
 
